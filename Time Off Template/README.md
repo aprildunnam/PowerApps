@@ -2,6 +2,8 @@
 ## Time Off Template
 This solution allows you to enter requests for time off, see your request history, view your teams vacation schedule on a shared calendar, and approve requests all from one central application.
 
+![Desk Reservation App Dashboard](timeAwayScreenshot.png)
+
 ## Deployment Instructions
 1.  Download the Time Off Zip File
 2.  Go to make.powerapps.com
