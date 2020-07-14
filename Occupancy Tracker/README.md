@@ -4,6 +4,8 @@ This Power App allows you to track and limit the occupancy of a room.  It's desi
 
 The app contains a Settings mechanism that can be controled by an administrator to customize the app.  An admin can set up rooms and configure which room to display in the app session.  You can also control options to require check in questions.  
 
+![Occupancy Tracker App](occupancyScreenshot.png)
+
 ## Deployment Instructions
 1.  Download the Occupancy Tracker App Zip and the Occupancy List Set Up Zip
 2.  Go to flow.microsoft.com
