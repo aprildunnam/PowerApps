@@ -2,7 +2,7 @@
 ## Desk Booking Template
 This Power App allows you to create and manage reservations for desks but it can be modified for any type of reservation scenario.   It's designed to be a mobile app which contains a dashboard page to manage reservations and screens to create a new reservation.
 
-![Desk Reservation App Dashboard(https://github.com/aprildunnam/PowerApps/tree/master/Desk%20Reservation%20Template/deskHomeScreen.png)
+![Desk Reservation App Dashboard](https://github.com/aprildunnam/PowerApps/tree/master/Desk%20Reservation%20Template/deskHomeScreen.png)
 
 ## Deployment Instructions
 1.  Download the Desk Reservation App Zip and the Desk Reservation Provisioner Zip
