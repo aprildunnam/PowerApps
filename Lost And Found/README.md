@@ -1,5 +1,5 @@
 
-## Lost and Found Templates
+## Lost and Found Template
 This mobile-based Power App gives you a lost and found solution for your organization.
 
 ![Lost and Found App](lostAndFoundScreenshot.png)
