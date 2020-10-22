@@ -1,0 +1,7 @@
+Personal/Tenant App Deep Link Format:
+
+https://teams.microsoft.com/l/entity/<Power App ID>/<Power App ID>?context=%7B%22subEntityId%22%3A%22<Deep Link ID>%22%7D
+
+Power Apps as a Teams Tab Format:
+
+https://teams.microsoft.com/l/entity/<App ID>/_djb2_msteams_prefix_1337634199?context=%7B%22subEntityId%22%3A<Deep Link ID>%2C%22channelId%22%3A%22<Team Channel ID>%22%7D&groupId=<Team Group ID>&tenantId=<Your Tenant ID>
