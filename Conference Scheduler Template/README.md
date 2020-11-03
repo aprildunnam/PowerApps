@@ -10,4 +10,5 @@ This template gives you a complete conference management and scheduling solution
 3.  Click on the solutions tab
 4.  Select "Import Solution"
 
+*If you only want to use the Event Scheduler Canvas App and use your own database, I have provided just the Canvas App for you to download.  You can import the "EventSchedulerAppOnly" zip in Power Apps via the 'Import App' tab and change all the references to your data source.
 
