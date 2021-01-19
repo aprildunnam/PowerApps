@@ -4,6 +4,8 @@ This Power App allows you to create and manage reservations for desks but it can
 
 ![Desk Reservation App Dashboard](deskHomeScreen.png)
 
+* * *
+
 ## Deployment Instructions
 1.  Download the Desk Reservation App Zip and the Desk Reservation Provisioner Zip
 2.  Go to flow.microsoft.com
