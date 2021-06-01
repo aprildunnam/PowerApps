@@ -1,0 +1,117 @@
+"Success As screen.'phoneLayout_Success_ver3.0'":
+    Width: =Max(App.Width, App.DesignWidth)
+    Height: =Max(App.Height, App.DesignHeight)
+    Fill: =RGBA(236, 236, 236, 1)
+
+    bgRounded_5 As htmlViewer:
+        HtmlText: |-
+            ="<div style='border-radius:10%;height:700px;width:100%;background-color:#FCFCFC'></div>"
+        Y: =113
+        X: =15
+        Height: =748
+        Width: =610
+        ZIndex: =3
+
+    iconCircle1 As circle.Circle:
+        Fill: =RGBA(135, 78, 181, 1)
+        Y: =(Parent.Height/2 - Self.Height/2) * .7
+        X: =Parent.Width/2 - Self.Width/2
+        ZIndex: =4
+
+    iconCheck1 As icon.Check:
+        Icon: =Icon.Check
+        Y: =(Parent.Height/2 - Self.Height/2) * .7
+        X: =Parent.Width/2 - Self.Width/2
+        Width: =iconCircle1.Width
+        Height: =iconCircle1.Height
+        ZIndex: =5
+        PaddingTop: =18
+        PaddingLeft: =Self.PaddingTop
+        PaddingRight: =Self.PaddingTop
+        PaddingBottom: =Self.PaddingTop
+
+    LblSuccessMsg1 As label:
+        Text: ="You're booked!"
+        Align: =Align.Center
+        Width: =Parent.Width * 0.75
+        Y: =iconCheck1.Y + iconCheck1.Height + 100
+        X: =Parent.Width/2 - Self.Width/2
+        Height: =iconCircle1.Height
+        ZIndex: =6
+        AutoHeight: =true
+        Size: =21
+
+    Timer1 As timer:
+        Duration: =4000
+        AutoStart: =true
+        X: =299
+        Y: =861
+        Width: =280
+        Height: =70
+        ZIndex: =7
+        Visible: =false
+        OnTimerEnd: |-
+            =Refresh('Desk Reservations');
+            Navigate(Dashboard)
+
+    lblSuccess As label:
+        Text: ="Success"
+        Align: =Align.Center
+        ZIndex: =8
+        FontWeight: =Bold
+        Height: =113
+        Width: =640
+        Size: =32
+        Color: =RGBA(255, 255, 255, 1)
+
+    Tabs_6 As Tabs:
+        Items: |-
+            =Table(
+                {
+                    Name: "Dashboard",
+                    Icon: Icon.DetailList,
+                    Page: Dashboard,        
+                    Visible:true
+                },
+                {
+                    Name: "My Appts",
+                    Icon: Icon.Person,
+                    Page: MyAppts,
+                    Visible:true
+                },
+                 {
+                    Name: "Manage Desks",
+                    Icon: Icon.ComputerDesktop,
+                    Page: ManageDesks,
+                    Visible:true
+                },
+                {
+                    Name: "Book",
+                    Icon: Icon.Add,
+                    Page: DateSelection,
+                    Visible:true
+                }
+            )
+        ZIndex: =9
+        Y: =1016
+
+    grpHeader_3 As group:
+        ZIndex: =10
+        Height: =5
+        Width: =5
+        Y: =20
+        X: =40
+
+        Image2_3 As image:
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Height: =150
+            ZIndex: =1
+
+        Rectangle2_3 As rectangle:
+            Fill: =RGBA(135, 78, 181, 0.65)
+            Width: =640
+            Height: =150
+            ZIndex: =2
+

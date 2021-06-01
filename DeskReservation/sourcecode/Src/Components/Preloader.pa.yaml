@@ -1,0 +1,68 @@
+Preloader As CanvasComponent:
+    AnimatedGIF: |-
+        ="https://aka.ms/preloadergif"
+    Text: ="LOADING..."
+    IsLoading: =true
+    Styles: |-
+        =Table({Key:"Fill", Value:"#0086D0" , Type:"Color"})
+    Color: =
+    ZIndex: =1
+    Y: =0
+    X: =0
+    Width: =640
+    Height: =1136
+    Fill: =RGBA(255, 255, 255, 1)
+    Visible: =Preloader.IsLoading
+    OnReset: =
+
+    imgLoader As image:
+        Image: =Preloader.AnimatedGIF
+        ZIndex: =2
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Y: =Preloader.Height /2 - imgLoader.Height / 2
+        HoverFill: =ColorFade(imgLoader.Fill, 20%)
+        PressedFill: =ColorFade(imgLoader.Fill, -20%)
+        Height: =If(!IsBlank(LookUp(Preloader.Styles, Key = "PreloaderHeight").Value),LookUp(Preloader.Styles, Key = "PreloaderHeight").Value, 82)
+        Width: =If(!IsBlank(LookUp(Preloader.Styles, Key = "PreloaderWidth").Value),LookUp(Preloader.Styles, Key = "PreloaderWidth").Value, 82)
+        X: =Preloader.Width / 2 - imgLoader.Width / 2
+        FocusedBorderColor: =imgLoader.BorderColor
+        HoverBorderColor: =ColorFade(imgLoader.BorderColor, 20%)
+        PressedBorderColor: =ColorFade(imgLoader.BorderColor, -20%)
+
+    lblLoaderText As label:
+        Text: =Preloader.Text
+        Align: =Center
+        ZIndex: =3
+        Height: =70
+        Width: =Preloader.Width
+        Size: =21
+        Y: =imgLoader.Y + imgLoader.Height
+        HoverFill: =lblLoaderText.Fill
+        PressedFill: =lblLoaderText.Fill
+        FocusedBorderColor: =lblLoaderText.BorderColor
+        HoverBorderColor: =lblLoaderText.BorderColor
+        PressedBorderColor: =lblLoaderText.BorderColor
+        HoverColor: =lblLoaderText.Color
+        PressedColor: =lblLoaderText.Color
+        Font: =If(!IsBlank(LookUp(Preloader.Styles, Key = "Font").Value),LookUp(Preloader.Styles, Key = "Font").Value, Font.'Segoe UI') 
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Color: =If(!IsBlank(LookUp(Preloader.Styles, Key = "Fill").Value),ColorValue(LookUp(Preloader.Styles, Key = "Fill").Value), If(!IsBlank(Preloader.Color), Preloader.Color, DefaultStyle.Fill ))
+
+    DefaultStyle As button:
+        Text: ="Button"
+        Size: =24
+        ZIndex: =5
+        Height: =70
+        Width: =280
+        Y: =282
+        X: =60
+        HoverFill: =ColorFade(RGBA(100, 118, 132, 1), -20%)
+        PressedFill: =DefaultStyle.Color
+        Fill: =RGBA(100, 118, 132, 1)
+        PressedColor: =DefaultStyle.Fill
+        HoverBorderColor: =ColorFade(DefaultStyle.BorderColor, 20%)
+        PressedBorderColor: =DefaultStyle.Fill
+        BorderColor: =ColorFade(DefaultStyle.Fill, -15%)
+        FocusedBorderColor: =DefaultStyle.BorderColor
+        Visible: =false
+

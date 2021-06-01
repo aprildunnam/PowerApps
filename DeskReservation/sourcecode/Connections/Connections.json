@@ -1,0 +1,54 @@
+{
+  "123a155e-f1fd-425b-a90f-d76b754d2a96": {
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/3bf42c5ac2964f86ad79806552577077",
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1472/1.0.1472.2427/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {}
+    },
+    "datasets": {
+      "https://axecapitalcorp.sharepoint.com/sites/CrisisInformation": {
+        "dataSources": {
+          "Desk Reservations": {
+            "tableName": "218ee9d0-e055-40d8-a88d-db2f51e3c948"
+          },
+          "Desks": {
+            "tableName": "ff2dd3fd-ef06-4fa4-a030-466f3ae1d83a"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Desk Reservations",
+      "Desks"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "123a155e-f1fd-425b-a90f-d76b754d2a96"
+  },
+  "64852b16-4509-4d34-be4c-adfa1f496b3a": {
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_office365users/connections/567f1e9cc0de46f78585f19cd70e7526",
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1472/1.0.1472.2427/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "64852b16-4509-4d34-be4c-adfa1f496b3a"
+  }
+}

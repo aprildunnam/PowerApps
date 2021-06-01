@@ -1,0 +1,235 @@
+DateSelection As screen:
+    Width: =Max(App.Width, App.DesignWidth)
+    Height: =Max(App.Height, App.DesignHeight)
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: =
+
+    bgRounded_1 As htmlViewer:
+        HtmlText: |-
+            ="<div style='border-radius:10%;border-top-left-radius:10%;height:600px;width:100%;background-color:#FCFCFC'></div>"
+        Y: =118
+        X: =10
+        Height: =793
+        Width: =610
+        ZIndex: =3
+
+    Calendar_1 As Calendar:
+        EndDate: =If(Calendar_1.SelectRange,_selectedEnd,_selectedStart)
+        SelectedDateFill: =RGBA(135, 78, 181, 1)
+        BorderRadius: =1
+        DaysAheadRestriction: =60
+        Y: =138
+        ZIndex: =4
+        X: =22
+        Width: =593
+        Height: =539
+
+    btnContinueDate As button:
+        Text: ="Continue"
+        Y: =926
+        X: =316
+        ZIndex: =5
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        Height: =70
+        Width: =260
+        Size: =24
+        Fill: =RGBA(135, 78, 181, 1)
+        OnSelect: |-
+            =Set(
+                selectedDate,
+                Calendar_1.StartDate
+            );
+            Set(
+                selectedEndDate,
+                Calendar_1.EndDate
+            );
+            Set(
+                startTime,
+                DateTimeValue(
+                    Text(
+                        selectedDate,
+                        DateTimeFormat.ShortDate
+                    ) & " " & ddTimeFrom.Selected.Value
+                )
+            );
+            Set(
+                endTime,
+                If(
+                    DateValue(
+                        Text(
+                            selectedEndDate,
+                            DateTimeFormat.ShortDate
+                        )
+                    ) < DateValue(
+                        Text(
+                            selectedDate,
+                            DateTimeFormat.ShortDate
+                        )
+                    ),
+                    DateTimeValue(
+                        Text(
+                            selectedDate,
+                            DateTimeFormat.ShortDate
+                        ) & " " & ddTimeTo.Selected.Value
+                    ),
+                    DateTimeValue(
+                        Text(
+                            selectedEndDate,
+                            DateTimeFormat.ShortDate
+                        ) & " " & ddTimeTo.Selected.Value
+                    )
+                )
+            );
+            If(
+                IsEmpty(startTime) && IsEmpty(endTime),
+                Notify(
+                    "You must select a date and time to continue",
+                    NotificationType.Warning
+                ),
+                Navigate(DeskSelect)
+            )
+
+    btnBackDate As button:
+        Text: ="Back"
+        Y: =926
+        X: =63
+        ZIndex: =6
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        Height: =70
+        Width: =200
+        Size: =24
+        Fill: =RGBA(128, 128, 128, 1)
+        OnSelect: =Reset(Calendar_1)  ;Back()
+
+    lblSelectDate As label:
+        Text: ="Select a Date"
+        Align: =Align.Center
+        ZIndex: =7
+        FontWeight: =Bold
+        Height: =118
+        Width: =640
+        Size: =32
+        Color: =RGBA(255, 255, 255, 1)
+
+    lblSelectTimeSlot As label:
+        Text: ="Select a Time Slot"
+        Align: =Align.Center
+        Size: =24
+        Y: =736
+        Width: =640
+        Height: =70
+        ZIndex: =8
+
+    ddTimeFrom As dropdown:
+        Items: |-
+            =With(
+                {Interval: 15},
+                ForAll(
+                    Sequence(60 * 24 / Interval),
+                    Time(
+                        0,
+                        Interval * (Value - 1),
+                        0
+                    )
+                )
+            )
+        Default: |-
+            ="9:00 AM"
+        AccessibleLabel: ="Start Time"
+        Width: =190
+        ChevronHoverBackground: |-
+            =ColorValue("#874EB5")
+        ChevronFill: =White
+        ChevronBackground: |-
+            =ColorValue("#874EB5")
+        BorderColor: =RGBA(135, 78, 181, 1)
+        BorderThickness: =1
+        HoverFill: =LightGray
+        Size: =21
+        X: =63
+        Y: =813
+        Height: =66
+        ZIndex: =9
+
+    lblTo As label:
+        Text: ="to"
+        Align: =Align.Center
+        Size: =21
+        X: =259
+        Y: =813
+        Width: =80
+        Height: =66
+        ZIndex: =10
+
+    ddTimeTo As dropdown:
+        Items: |-
+            =With({Interval: 15}, ForAll(Sequence(60*24/Interval), Time(0,Interval*(Value-1),0)))
+        Default: |-
+            ="10:00 AM"
+        AccessibleLabel: ="End Time"
+        Width: =190
+        Y: =813
+        ChevronBackground: |-
+            =ColorValue("#874EB5")
+        ChevronHoverBackground: |-
+            =ColorValue("#874EB5")
+        BorderThickness: =1
+        ChevronFill: =White
+        BorderColor: =RGBA(135, 78, 181, 1)
+        HoverFill: =LightGray
+        Size: =21
+        X: =347
+        Height: =66
+        ZIndex: =11
+
+    Tabs_5 As Tabs:
+        Items: |-
+            =Table(
+                {
+                    Name: "Dashboard",
+                    Icon: Icon.DetailList,
+                    Page: Dashboard,        
+                    Visible:true
+                },
+                {
+                    Name: "My Appts",
+                    Icon: Icon.Person,
+                    Page: MyAppts,
+                    Visible:true
+                },
+                 {
+                    Name: "Manage Desks",
+                    Icon: Icon.ComputerDesktop,
+                    Page: ManageDesks,
+                    Visible:true
+                },
+                {
+                    Name: "Book",
+                    Icon: Icon.Add,
+                    Page: DateSelection,
+                    Visible:true
+                }
+            )
+        ZIndex: =12
+        Y: =1016
+
+    grpHeader As group:
+        ZIndex: =13
+        Height: =5
+        Width: =5
+        Y: =40
+        X: =40
+
+        Image2_1 As image:
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Height: =150
+            ZIndex: =1
+
+        Rectangle2 As rectangle:
+            Fill: =RGBA(135, 78, 181, 0.65)
+            Width: =640
+            Height: =150
+            ZIndex: =2
+

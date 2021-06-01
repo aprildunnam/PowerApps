@@ -1,0 +1,22 @@
+App As appinfo:
+    BackEnabled: =false
+    MinScreenHeight: =320
+    MinScreenWidth: =320
+    OnStart: |-
+        =Set(
+            varTimer,
+            true
+        );
+        Set(
+            currentUser,
+            User()
+        );
+        If(
+            Param("ScreenToShow") = "New",
+            Navigate(DateSelection)
+        );
+        Set(
+            varTimer,
+            false
+        )
+

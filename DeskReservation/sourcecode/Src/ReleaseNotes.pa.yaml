@@ -1,0 +1,85 @@
+"ReleaseNotes As screen.'phoneLayout_Success_ver3.0'":
+    Fill: =RGBA(236, 236, 236, 1)
+    Height: =Max(App.Height, App.DesignHeight)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    bgRounded_13 As htmlViewer:
+        HtmlText: |-
+            ="<div style='border-radius:10%;height:800px;width:100%;background-color:#FCFCFC'></div>"
+        Y: =113
+        X: =15
+        Height: =868
+        Width: =610
+        ZIndex: =3
+
+    lblSuccess_2 As label:
+        Text: ="Release Notes"
+        Align: =Align.Center
+        ZIndex: =8
+        FontWeight: =Bold
+        Height: =113
+        Width: =640
+        Size: =32
+        Color: =RGBA(255, 255, 255, 1)
+
+    Tabs_11 As Tabs:
+        Items: |-
+            =Table(
+                {
+                    Name: "Dashboard",
+                    Icon: Icon.DetailList,
+                    Page: Dashboard,        
+                    Visible:true
+                },
+                {
+                    Name: "My Appts",
+                    Icon: Icon.Person,
+                    Page: MyAppts,
+                    Visible:true
+                },
+                 {
+                    Name: "Manage Desks",
+                    Icon: Icon.ComputerDesktop,
+                    Page: ManageDesks,
+                    Visible:true
+                },
+                {
+                    Name: "Book",
+                    Icon: Icon.Add,
+                    Page: DateSelection,
+                    Visible:true
+                }
+            )
+        ZIndex: =9
+        Y: =1016
+
+    HtmlText1 As htmlViewer:
+        HtmlText: |-
+            ="<p>New Features:</p><ul><li>Disable the selection of previous days on the calendar</li><li>Added ability to restrict the calendar selection to X days in the future</li><li>Added Manage Desk Screens</li><li>Added View Reservation Screen</li></ul><p>Bug Fixes/Optimizations</p><ul><li>Clear out selections after confirmation</li><li>Optimize time dropdowns</li><li>Fix time zone issues</li></ul>"
+        Width: =560
+        Height: =693
+        X: =40
+        Y: =168
+        ZIndex: =10
+        Size: =20
+
+    grpHeader_9 As group:
+        ZIndex: =10
+        Height: =5
+        Width: =5
+        Y: =20
+        X: =40
+
+        Image2_10 As image:
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Height: =150
+            ZIndex: =1
+
+        Rectangle2_9 As rectangle:
+            Fill: =RGBA(135, 78, 181, 0.65)
+            Width: =640
+            Height: =150
+            ZIndex: =2
+

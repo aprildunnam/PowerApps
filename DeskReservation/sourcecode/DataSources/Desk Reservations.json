@@ -1,0 +1,52 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+    "CdpRevision": {
+      "BaseUrl": "/",
+      "LastChangedTimeString": "2021-05-20T16:38:27.0470000Z",
+      "RevisionNumber": 1
+    },
+    "ConnectedDataSourceInfoNameMapping": {
+      "{Attachments}": "Attachments",
+      "{Attachments}@odata.type": "{Attachments} ({Attachments}@odata.type)",
+      "{FilenameWithExtension}": "File name with extension",
+      "{FullPath}": "Full Path",
+      "{HasAttachments}": "Has attachments",
+      "{Identifier}": "Identifier",
+      "{IsFolder}": "IsFolder",
+      "{Link}": "Link to item",
+      "{ModerationComment}": "Comments associated with the content approval of this list item",
+      "{ModerationStatus}": "Content approval status",
+      "{Name}": "Name",
+      "{Path}": "Folder path",
+      "{Thumbnail}": "Thumbnail",
+      "{TriggerWindowEndToken}": "Trigger Window End Token",
+      "{TriggerWindowStartToken}": "Trigger Window Start Token",
+      "{VersionNumber}": "Version number",
+      "Author": "Created By",
+      "Author#Claims": "Created By Claims",
+      "CheckOutFrom": "Check Out From",
+      "CheckOutFromNumber": "Check Out From Number",
+      "CheckOutFromText": "Check Out From Text",
+      "CheckOutTo": "Check Out To",
+      "CheckOutToNumber": "Check Out To Number",
+      "CheckOutToText": "Check Out To Text",
+      "ComplianceAssetId": "Compliance Asset Id",
+      "Created": "Created",
+      "DeskText": "DeskText",
+      "Editor": "Modified By",
+      "Editor#Claims": "Modified By Claims",
+      "ID": "ID",
+      "Modified": "Modified",
+      "ReservedBy": "Reserved By",
+      "ReservedBy#Claims": "Reserved By Claims",
+      "Title": "Title"
+    },
+    "DatasetName": "https://axecapitalcorp.sharepoint.com/sites/CrisisInformation",
+    "EncodeDataset": true,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "Desk Reservations",
+    "Type": "ConnectedDataSourceInfo"
+  }
+]

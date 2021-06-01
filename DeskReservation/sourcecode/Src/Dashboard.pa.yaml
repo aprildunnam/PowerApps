@@ -1,0 +1,283 @@
+Dashboard As screen:
+    Width: =Max(App.Width, App.DesignWidth)
+    Height: =Max(App.Height, App.DesignHeight)
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: =Set(varCurrentDate,Text(Today()))
+
+    Tabs_1 As Tabs:
+        Items: |-
+            =Table(
+                {
+                    Name: "Dashboard",
+                    Icon: Icon.DetailList,
+                    Page: Dashboard,        
+                    Visible:true
+                },
+                {
+                    Name: "My Appts",
+                    Icon: Icon.Person,
+                    Page: MyAppts,
+                    Visible:true
+                },
+                 {
+                    Name: "Manage Desks",
+                    Icon: Icon.ComputerDesktop,
+                    Page: ManageDesks,
+                    Visible:true
+                },
+                {
+                    Name: "Book",
+                    Icon: Icon.Add,
+                    Page: DateSelection,
+                    Visible:true
+                }
+            )
+        ZIndex: =1
+        Y: =1016
+
+    imgDashboardBG As image:
+        Image: ='pexels-photo-273238'
+        ZIndex: =2
+        ImagePosition: =ImagePosition.Fill
+        Height: =353
+        Width: =640
+
+    lblWelcome As label:
+        Text: ="Welcome back, " 
+        ZIndex: =3
+        FontWeight: =Bold
+        Height: =115
+        Width: =335
+        Size: =32
+        Y: =12
+        X: =268
+        Font: =Font.'Segoe UI'
+
+    lblName As label:
+        Text: =Trim(Last(FirstN(Split(currentUser.FullName," "), 1)).Result)
+        ZIndex: =4
+        FontWeight: =Bold
+        Height: =80
+        Width: =310
+        Size: =36
+        Y: =107
+        X: =293
+        Font: =Font.'Segoe UI'
+
+    bgRounded_3 As htmlViewer:
+        HtmlText: |-
+            ="<div style='border:1px gray;border-radius:10%;height:600px;width:100%;background-color:#FCFCFC'></div>"
+        Y: =328
+        X: =15
+        Height: =660
+        Width: =610
+        ZIndex: =5
+
+    lblMyUpcomingRes As label:
+        Text: ="Upcoming Reservations"
+        Align: =Align.Center
+        ZIndex: =6
+        FontWeight: =Semibold
+        Height: =61
+        Width: =640
+        Size: =21
+        Y: =337
+        Font: =Font.'Segoe UI'
+
+    "gallMyReservationsPreview As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Items: |-
+            =FirstN(
+                SortByColumns(
+                    Filter(
+                        'Desk Reservations',
+                        'Reserved By'.Email = currentUser.Email && 'Check Out From Number' >= Value(
+                            Text(
+                                Today(),
+                                "yyyymmddhmm"
+                            )
+                        )
+                    ),
+                    "CheckOutFromNumber",
+                    Ascending
+                ),
+                2
+            )
+        AccessibleLabel: ="Upcoming Reservations"
+        TemplateSize: =186
+        TemplatePadding: =0
+        Layout: =Layout.Vertical
+        X: =53
+        Y: =408
+        Width: =532
+        Height: =483
+        ZIndex: =7
+        TabIndex: =5
+
+        Title2 As label:
+            Text: =Upper(Text(DateTimeValue(ThisItem.'Check Out From Text'),"[$-en-US]mmm"))
+            Height: =57
+            Font: =Font.'Segoe UI'
+            Align: =Align.Center
+            VerticalAlign: =VerticalAlign.Top
+            X: =If(Upper(Text(DateTimeValue(ThisItem.'Check Out From Text'),"[$-en-US]dd")) = Upper(Text(DateTimeValue(ThisItem.'Check Out To Text'),"[$-en-US]dd")),55,2)
+            Y: =29
+            Width: =94
+            ZIndex: =1
+            PaddingTop: =0
+            PaddingRight: =0
+            PaddingBottom: =0
+            PaddingLeft: =0
+            Size: =28
+            OnSelect: =Select(Parent)
+
+        Separator2 As rectangle:
+            Fill: =RGBA(135, 78, 181, 1)
+            Y: =Parent.TemplateHeight - 1
+            Width: =Parent.TemplateWidth
+            Height: =1
+            ZIndex: =3
+            OnSelect: =Select(Parent)
+
+        Title2_1 As label:
+            Text: |-
+                =Upper(
+                    Text(
+                        DateTimeValue(ThisItem.'Check Out From Text'),
+                        "[$-en-US]dd"
+                    )
+                )
+            Height: =49
+            Color: =RGBA(135, 78, 181, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =Bold
+            Align: =Align.Center
+            VerticalAlign: =VerticalAlign.Top
+            X: =Title2.X
+            Y: =86
+            Width: =94
+            ZIndex: =4
+            PaddingTop: =0
+            PaddingRight: =0
+            PaddingBottom: =0
+            PaddingLeft: =0
+            Size: =32
+            OnSelect: =Select(Parent)
+
+        Title2_2 As label:
+            Text: =ThisItem.DeskText
+            Height: =57
+            Font: =Font.'Segoe UI'
+            Align: =Align.Center
+            VerticalAlign: =VerticalAlign.Top
+            X: =203
+            Y: =29
+            Width: =300
+            ZIndex: =5
+            PaddingTop: =0
+            PaddingRight: =10
+            PaddingBottom: =0
+            PaddingLeft: =10
+            Size: =26
+            OnSelect: =Select(Parent)
+
+        Title2_3 As label:
+            Text: =Text(DateTimeValue(ThisItem.'Check Out From Text'), DateTimeFormat.ShortTime) & " to " & Text(DateTimeValue(ThisItem.'Check Out To Text'), DateTimeFormat.ShortTime)
+            Height: =42
+            Font: =Font.'Segoe UI'
+            Align: =Align.Center
+            VerticalAlign: =VerticalAlign.Top
+            X: =178
+            Y: =93
+            Width: =350
+            ZIndex: =6
+            PaddingTop: =0
+            PaddingRight: =10
+            PaddingBottom: =0
+            PaddingLeft: =10
+            Size: =24
+            OnSelect: =Select(Parent)
+
+        Title2_14 As label:
+            Text: =Upper(Text(DateTimeValue(ThisItem.'Check Out To Text'),"[$-en-US]mmm"))
+            Height: =57
+            Font: =Font.'Segoe UI'
+            Align: =Align.Center
+            VerticalAlign: =VerticalAlign.Top
+            X: =108
+            Y: =29
+            Width: =94
+            ZIndex: =7
+            PaddingTop: =0
+            PaddingRight: =0
+            PaddingBottom: =0
+            PaddingLeft: =0
+            Size: =28
+            Visible: =If(Upper(Text(DateTimeValue(ThisItem.'Check Out From Text'),"[$-en-US]dd")) = Upper(Text(DateTimeValue(ThisItem.'Check Out To Text'),"[$-en-US]dd")), false, true)
+            OnSelect: =Select(Parent)
+
+        Title2_15 As label:
+            Text: =Upper(Text(DateTimeValue(ThisItem.'Check Out To Text'),"[$-en-US]dd"))
+            Height: =49
+            Color: =RGBA(135, 78, 181, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =Bold
+            Align: =Align.Center
+            VerticalAlign: =VerticalAlign.Top
+            X: =Title2_14.X
+            Y: =86
+            Width: =94
+            ZIndex: =8
+            PaddingTop: =0
+            PaddingRight: =0
+            PaddingBottom: =0
+            PaddingLeft: =0
+            Size: =32
+            Visible: =Title2_14.Visible
+            OnSelect: =Select(Parent)
+
+        Label2_1 As label:
+            Text: =" to "
+            FontWeight: =FontWeight.Semibold
+            Align: =Align.Center
+            X: =85
+            Y: =65
+            Width: =43
+            Height: =68
+            ZIndex: =9
+            Size: =21
+            Visible: =Title2_14.Visible
+            OnSelect: =Select(Parent)
+
+        Icon6 As icon.View:
+            Icon: =Icon.OpenInNewWindow
+            Color: =RGBA(135, 78, 181, 1)
+            X: =458
+            Y: =133
+            Width: =45
+            Height: =45
+            ZIndex: =10
+            OnSelect: =Set(varSelectedReservation,ThisItem);Navigate(Reservation)
+
+    lblNoResDashboard As label:
+        Text: ="No upcoming reservations"
+        ZIndex: =8
+        Visible: =If(CountRows(gallMyReservationsPreview.AllItems) >=1, false, true)
+        Height: =90
+        FontWeight: =Lighter
+        Width: =640
+        Y: =526
+        Align: =Align.Center
+        Size: =21
+
+    Label8 As label:
+        Text: ="V3"
+        X: =15
+        Width: =53
+        Height: =45
+        ZIndex: =9
+        Size: =14
+
+    Preloader_1 As Preloader:
+        ZIndex: =10
+        Visible: =varTimer
+

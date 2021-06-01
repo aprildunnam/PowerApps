@@ -1,0 +1,380 @@
+Reservation As screen:
+    Height: =Max(App.Height, App.DesignHeight)
+    Fill: =RGBA(236, 236, 236, 1)
+    Width: =Max(App.Width, App.DesignWidth)
+    OnVisible: |-
+        =UpdateContext({prevSelected:false});UpdateContext({upSelected:true});
+
+    lblMyAppointments_3 As label:
+        Text: ="Reservation"
+        Align: =Align.Center
+        ZIndex: =3
+        FontWeight: =Bold
+        Height: =115
+        Width: =640
+        Size: =32
+        Font: =Font.'Segoe UI'
+        Color: =RGBA(255, 255, 255, 1)
+
+    bgRounded_11 As htmlViewer:
+        HtmlText: |-
+            ="<div style='border:1px gray;border-radius:10%;height:870px;width:100%;background-color:#FCFCFC'></div>"
+        Y: =116
+        X: =15
+        Height: =898
+        Width: =610
+        ZIndex: =4
+
+    Tabs_10 As Tabs:
+        Items: |-
+            =Table(
+                {
+                    Name: "Dashboard",
+                    Icon: Icon.DetailList,
+                    Page: Dashboard,        
+                    Visible:true
+                },
+                {
+                    Name: "My Appts",
+                    Icon: Icon.Person,
+                    Page: MyAppts,
+                    Visible:true
+                },
+                 {
+                    Name: "Manage Desks",
+                    Icon: Icon.ComputerDesktop,
+                    Page: ManageDesks,
+                    Visible:true
+                },
+                {
+                    Name: "Book",
+                    Icon: Icon.Add,
+                    Page: DateSelection,
+                    Visible:true
+                }
+            )
+        ZIndex: =5
+        Y: =1016
+
+    lblNameDesk_1 As label:
+        Text: ="Name"
+        Size: =21
+        ZIndex: =6
+        Height: =70
+        Width: =560
+        Y: =170
+        X: =40
+        FontWeight: =FontWeight.Semibold
+        Font: =Font.'Segoe UI'
+
+    tbNameDesk_1 As text:
+        Default: =varSelectedReservation.DeskText
+        AccessibleLabel: ="Desk Name Input"
+        BorderThickness: =1
+        ZIndex: =7
+        DisplayMode: =DisplayMode.View
+        Height: =70
+        Width: =540
+        Y: =240
+        X: =50
+        Size: =18
+        Font: =Font.'Segoe UI'
+        BorderColor: =RGBA(179, 179, 179, 1)
+
+    lblFloorDesk_1 As label:
+        Text: ="Floor"
+        Size: =21
+        ZIndex: =8
+        Height: =70
+        Width: =250
+        Y: =328
+        X: =40
+        FontWeight: =FontWeight.Semibold
+        Font: =Font.'Segoe UI'
+
+    tbFloorDesk_1 As text:
+        Default: =LookUp(Desks,Title = varSelectedReservation.DeskText).Floor
+        AccessibleLabel: ="Floor Input"
+        BorderThickness: =1
+        ZIndex: =9
+        DisplayMode: =DisplayMode.View
+        Height: =70
+        Width: =250
+        Y: =398
+        X: =50
+        Size: =18
+        Font: =Font.'Segoe UI'
+        BorderColor: =RGBA(179, 179, 179, 1)
+
+    lblMapDesk_1 As label:
+        Text: ="From"
+        Size: =21
+        ZIndex: =10
+        Height: =70
+        Width: =250
+        Y: =484
+        X: =40
+        FontWeight: =FontWeight.Semibold
+        Font: =Font.'Segoe UI'
+
+    tbMapDesk_1 As text:
+        Default: =varSelectedReservation.'Check Out From Text'
+        AccessibleLabel: ="Map Link Input"
+        BorderThickness: =1
+        ZIndex: =11
+        DisplayMode: =DisplayMode.View
+        Height: =70
+        Width: =250
+        Y: =554
+        X: =50
+        Size: =18
+        Font: =Font.'Segoe UI'
+        BorderColor: =RGBA(179, 179, 179, 1)
+
+    lblDescrDesk_1 As label:
+        Text: ="Description"
+        Size: =21
+        ZIndex: =12
+        Height: =70
+        Width: =560
+        Y: =636
+        X: =40
+        FontWeight: =FontWeight.Semibold
+        Font: =Font.'Segoe UI'
+
+    tbDescrDesk_1 As text:
+        Default: =LookUp(Desks,Title = varSelectedReservation.DeskText).Description
+        AccessibleLabel: ="Desk Description Input"
+        BorderThickness: =1
+        ZIndex: =13
+        DisplayMode: =DisplayMode.View
+        Height: =142
+        Width: =540
+        Y: =706
+        X: =50
+        Size: =18
+        Font: =Font.'Segoe UI'
+        BorderColor: =RGBA(179, 179, 179, 1)
+        Mode: =TextMode.MultiLine
+
+    btnUpdate_1 As button:
+        Text: ="CANCEL"
+        Fill: =RGBA(184, 0, 0, 1)
+        Width: =260
+        Height: =70
+        ZIndex: =14
+        Size: =24
+        X: =316
+        Y: =888
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: |-
+            =UpdateContext({varConfirmCancel:true})
+
+    btnBackDeskEdit_1 As button:
+        Text: ="Back"
+        Fill: =RGBA(128, 128, 128, 1)
+        Width: =200
+        Height: =70
+        ZIndex: =15
+        Size: =24
+        X: =63
+        Y: =888
+        HoverFill: =ColorFade(Self.Fill, -20%)
+        OnSelect: |-
+            =Reset(tbDescrDesk_1);
+            Reset(tbFloorDesk_1);
+            Reset(tbMapDesk_1);
+            Reset(tbNameDesk_1);
+            Back()
+
+    iconViewMap_1 As icon.View:
+        AccessibleLabel: ="View Map"
+        Width: =40
+        Y: =185
+        X: =185
+        ZIndex: =16
+        Color: =RGBA(128, 128, 128, 1)
+        Icon: =Icon.View
+        Height: =40
+        TabIndex: =7
+        OnSelect: |-
+            =UpdateContext({showMap:true})
+
+    lblToRes As label:
+        Text: ="To"
+        Size: =21
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        X: =330
+        Y: =484
+        Width: =250
+        Height: =70
+        ZIndex: =17
+
+    tbTo As text:
+        Default: =varSelectedReservation.'Check Out To Text'
+        AccessibleLabel: ="Map Link Input"
+        BorderColor: =RGBA(179, 179, 179, 1)
+        Font: =Font.'Segoe UI'
+        X: =340
+        Y: =554
+        Width: =250
+        Height: =70
+        DisplayMode: =DisplayMode.View
+        ZIndex: =18
+        BorderThickness: =1
+        Size: =18
+
+    grpHeader_8 As group:
+        ZIndex: =18
+        Height: =5
+        Width: =5
+        Y: =20
+        X: =40
+
+        Image2_9 As image:
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Height: =150
+            ZIndex: =1
+
+        Rectangle2_8 As rectangle:
+            Fill: =RGBA(135, 78, 181, 0.65)
+            Width: =640
+            Height: =150
+            ZIndex: =2
+
+    lblReservedOn As label:
+        Text: ="Reserved On"
+        Size: =21
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        X: =330
+        Y: =328
+        Width: =250
+        Height: =70
+        ZIndex: =19
+
+    tbReservedOn As text:
+        Default: =varSelectedReservation.Created
+        AccessibleLabel: ="Map Link Input"
+        BorderColor: =RGBA(179, 179, 179, 1)
+        Font: =Font.'Segoe UI'
+        X: =340
+        Y: =398
+        Width: =250
+        Height: =70
+        DisplayMode: =DisplayMode.View
+        ZIndex: =20
+        BorderThickness: =1
+        Size: =18
+
+    grpMap_2 As group:
+        ZIndex: =28
+        Height: =5
+        Width: =5
+        Y: =60
+        X: =60
+
+        Rectangle3_4 As rectangle:
+            Fill: =RGBA(116, 116, 116, 0.85)
+            Width: =640
+            Height: =1136
+            ZIndex: =21
+            Visible: =showMap
+
+        Image5_2 As image:
+            Image: =LookUp(Desks,Title = varSelectedReservation.DeskText).'Map Link'
+            ImagePosition: =ImagePosition.Fill
+            X: =21
+            Y: =254
+            Width: =609
+            Height: =500
+            ZIndex: =22
+            Visible: =showMap
+
+        Icon1_2 As icon.Cancel:
+            AccessibleLabel: ="Close Map"
+            Icon: =Icon.Cancel
+            Color: =RGBA(255, 255, 255, 1)
+            X: =560
+            Y: =170
+            ZIndex: =23
+            TabIndex: =11
+            Visible: =showMap
+            OnSelect: |-
+                =UpdateContext({showMap:!showMap})
+
+    grpConfirmCancel_1 As group:
+        X: =40
+        Y: =40
+        Width: =5
+        Height: =5
+        ZIndex: =29
+
+        Rectangle3_5 As rectangle:
+            Fill: =RGBA(116, 116, 116, 0.85)
+            Width: =640
+            Height: =1136
+            ZIndex: =24
+            Visible: =varConfirmCancel
+
+        bgRounded_12 As htmlViewer:
+            HtmlText: |-
+                ="<div style='border:1px gray;border-radius:10%;height:450px;width:100%;background-color:#FCFCFC'></div>"
+            Y: =165
+            X: =14
+            Height: =651
+            Width: =610
+            ZIndex: =25
+            Visible: =varConfirmCancel
+
+        Label1_2 As label:
+            Text: ="Confirm Cancellation"
+            FontWeight: =FontWeight.Semibold
+            Align: =Align.Center
+            X: =40
+            Y: =234
+            Width: =557
+            Height: =87
+            ZIndex: =26
+            Size: =24
+            Visible: =varConfirmCancel
+
+        btnConfirmCancel_2 As button:
+            Text: ="NEVERMIND"
+            BorderThickness: =0
+            RadiusBottomRight: =20
+            Visible: =varConfirmCancel
+            RadiusBottomLeft: =20
+            RadiusTopRight: =20
+            RadiusTopLeft: =20
+            ZIndex: =27
+            Height: =45
+            Y: =401
+            Size: =14
+            X: =141
+            Fill: =RGBA(128, 128, 128, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =UpdateContext({varConfirmCancel:false})
+
+        btnConfirmDelete_2 As button:
+            Text: ="CONFIRM"
+            BorderThickness: =0
+            RadiusBottomRight: =20
+            Visible: =varConfirmCancel
+            RadiusBottomLeft: =20
+            RadiusTopRight: =20
+            RadiusTopLeft: =20
+            ZIndex: =28
+            Height: =45
+            Y: =401
+            Size: =14
+            X: =341
+            Fill: =RGBA(184, 0, 0, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Remove('Desk Reservations',varSelectedReservation);UpdateContext({varConfirmCancel:false})
+

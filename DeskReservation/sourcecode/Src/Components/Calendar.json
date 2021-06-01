@@ -1,0 +1,127 @@
+{
+  "ComponentAllowCustomization": true,
+  "ComponentChangedSinceFileImport": false,
+  "ComponentManifest": {
+    "AllowAccessToGlobals": false,
+    "AllowCustomization": true,
+    "Description": "",
+    "Name": "Calendar",
+    "TemplateGuid": "0c469c74dd37480dbc0b81f64833370c"
+  },
+  "ComponentType": "CanvasComponent",
+  "CustomGroupControlTemplateName": "",
+  "CustomProperties": [
+    {
+      "Category": 0,
+      "DisplayName": "Start Date",
+      "Hidden": true,
+      "Name": "StartDate",
+      "PropertyDataTypeKey": "DateTime",
+      "Tooltip": "Start date",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"DateTime\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "End Date",
+      "Hidden": true,
+      "Name": "EndDate",
+      "PropertyDataTypeKey": "DateTime",
+      "Tooltip": "End date",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"DateTime\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Color",
+      "Hidden": false,
+      "Name": "Color",
+      "PropertyDataTypeKey": "Color",
+      "Tooltip": "Text color",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Color\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Select Range",
+      "Hidden": false,
+      "Name": "SelectRange",
+      "PropertyDataTypeKey": "Boolean",
+      "Tooltip": "True if selecting a date range and false for a single date",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"_MinPrimitive\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Border Radius",
+      "Hidden": false,
+      "Name": "BorderRadius",
+      "PropertyDataTypeKey": "Number",
+      "Tooltip": "Border radius of the calendar selections",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Selected Date Color",
+      "Hidden": false,
+      "Name": "SelectedDateColor",
+      "PropertyDataTypeKey": "Color",
+      "Tooltip": "Selected date color",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Color\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Selected Date Fill",
+      "Hidden": false,
+      "Name": "SelectedDateFill",
+      "PropertyDataTypeKey": "Color",
+      "Tooltip": "Fill of the selected day",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Color\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Default Start Date",
+      "Hidden": false,
+      "IsResettable": true,
+      "Name": "DefaultStartDate",
+      "PropertyDataTypeKey": "DateTime",
+      "Tooltip": "Default Start Date",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"DateTime\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Default End Date",
+      "Hidden": false,
+      "IsResettable": true,
+      "Name": "DefaultEndDate",
+      "PropertyDataTypeKey": "DateTime",
+      "Tooltip": "Default End Date",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"DateTime\",\"EnumString\":\"\",\"Type\":[]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Styles",
+      "Hidden": false,
+      "Name": "Styles",
+      "PropertyDataTypeKey": "Table",
+      "Tooltip": "Style sheet",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Key\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Type\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Value\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}]}}"
+    },
+    {
+      "Category": 0,
+      "DisplayName": "Days Ahead Restriction",
+      "Hidden": false,
+      "Name": "DaysAheadRestriction",
+      "PropertyDataTypeKey": "Number",
+      "Tooltip": "A custom property",
+      "Type": "{\"Version\":\"1.310\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]}}"
+    }
+  ],
+  "FirstParty": true,
+  "Id": "http://microsoft.com/appmagic/Component",
+  "IsComponentLocked": false,
+  "IsComponentTemplate": true,
+  "IsCustomGroupControlTemplate": false,
+  "IsPremiumPcfControl": false,
+  "LastModifiedTimestamp": "637580913176982229",
+  "Name": "0c469c74dd37480dbc0b81f64833370c",
+  "OverridableProperties": {},
+  "TemplateOriginalName": "fe29d6eb8ed24c219f22b476f07be944",
+  "Version": "637580199514479891"
+}
