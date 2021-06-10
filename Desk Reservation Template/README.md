@@ -10,7 +10,7 @@ This Power App allows you to create and manage reservations for desks but it can
 1.  Download the Desk Reservation App Zip and the Desk Reservation Provisioner Zip
 2.  Go to flow.microsoft.com
 3.  Import the Desk Reservation Provisioner Zip into Power Automate
-4.  Edit the Action that says "! Enter URL of SP Site to Deploy to here" and put in your SharePoinst site url that you want the underlying list to reside.  Keep not of that site URL.
+4.  Edit the Action that says "! Enter URL of SP Site to Deploy to here" and put in your SharePoinst site url that you want the underlying list to reside.  Keep note of that site URL.
 5. Run the "Desk Reservation Provisioner" Flow. This will create the necessary resources in Sharepoint.
 6.  Go to make.powerapps.com
 7.  Click on the Apps tabs on the left hand rail
