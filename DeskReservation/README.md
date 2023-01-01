@@ -63,7 +63,7 @@ This SharePoint list contains the information about the desks that people can bo
 |---|---|:---:|
 |Single line of text|Title|Yes|
 |Multiple lines of text|Description|No|
-|Hyperlink|Map Link|No|
+|Image|Map|No|
 |Number|Active|No|
 |Single line of text|Floor|No|
 
