@@ -79,10 +79,20 @@ This SharePoint list contains the reservation information.  Set the list up as f
 |Single line of text|Check Out To Text|No|
 |Number|Check Out From Number|No|
 |Number|Check Out To Number|No|
+[Choice][Status]["Booked","Checked In"]
+
+### DeskAdmins List
+
+This SharePoint list contains the email addresses of people who should have admin access in the app (to manage desks).  Set the list up as follows:
+
+|Type|Internal Name|Required|
+|---|---|:---:|
+|Single line of text|Title|Yes|
+
 
 ## Minimal Path to Awesome
 
-* [Download](./solution/DeskReservation.msapp) the `.msapp` from the `solution` folder
+* [Download](https://github.com/aprildunnam/PowerApps/blob/master/DeskReservation/solution/DeskBooking2023.zip) the `.msapp` from the `solution` folder
 * Within **Power Apps Studio**, use the `.msapp` file using **File** > **Open** > **Browse** and select the `.msapp` file you just downloaded.
 * Select the **Data** tab
 * Click the "..." next to the Desk Reservations and Desks data connections and select "remove"
