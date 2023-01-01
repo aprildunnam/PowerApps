@@ -7,11 +7,11 @@ This timesheet application is a tablet-based canvas app that gives you a way to 
 
 ### Home Screen
 
-![home screen](./assets/TimesheetHomeScreen.png)  
+![home screen](./timesheet.png)  
 
 ### Timesheet Entry Screen
 
-![timesheet entry screen](./assets/TimesheetEntryScreen.png)  
+![timesheet entry screen](./timesheet.png)  
 
 
 ## Applies to
