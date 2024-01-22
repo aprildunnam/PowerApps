@@ -1,0 +1,52 @@
+App As appinfo:
+    BackEnabled: =true
+    Formulas: |
+        =currentUser = User();
+        currentMonday = DateAdd(
+            Today(),
+            -1 * (Weekday(
+                Today(),
+                StartOfWeek.Monday
+            ) - 1),
+            TimeUnit.Days
+        );
+        weeksList = ForAll(
+            Sequence(
+                20,
+                Day(
+                    DateAdd(
+                        Today(),
+                        -1 * (Weekday(
+                            Today(),
+                            StartOfWeek.Monday
+                        ) - 1),
+                        TimeUnit.Days
+                    )
+                ) - 28,
+                7
+            ),
+            Date(
+                Year(Today()),
+                Month(
+                    DateAdd(
+                        Today(),
+                        -1 * (Weekday(
+                            Today(),
+                            StartOfWeek.Monday
+                        ) - 1),
+                        TimeUnit.Days
+                    )
+                ),
+                Value
+            )
+        );
+    OnStart: =
+    Theme: =PowerAppsTheme
+
+    Host As hostControl.DefaultHostControlVariant:
+        OnCancel: =false
+        OnEdit: =false
+        OnNew: =false
+        OnSave: =false
+        OnView: =false
+

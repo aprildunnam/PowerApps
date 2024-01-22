@@ -1,0 +1,56 @@
+{
+  "a35951ad-e9e2-4dcf-968c-7e1769a1fcc9": {
+    "appActions": [
+      "providers/PowerPlatform.Governance/Operations/Read",
+      "providers/PowerPlatform.Governance/Operations/Write",
+      "providers/PowerPlatform.Governance/Operations/Delete"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://axecapitalcorp.sharepoint.com/sites/HR": {
+        "dataSources": {
+          "BillTo": {
+            "tableName": "a8b7681a-1b0b-4870-b9c8-030d41a3c1a6"
+          },
+          "TimeEntries": {
+            "tableName": "514d240d-d49b-40ad-ac44-09e8f2456425"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "BillTo",
+      "TimeEntries"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "a35951ad-e9e2-4dcf-968c-7e1769a1fcc9"
+  },
+  "ae0b9f78-56fa-40df-9b1c-3de2009a62ec": {
+    "appActions": [
+      "Manager_V2"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "ae0b9f78-56fa-40df-9b1c-3de2009a62ec"
+  }
+}

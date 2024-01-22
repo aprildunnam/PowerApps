@@ -1,0 +1,400 @@
+"TimeCardApprovals As screen.'autoLayout_HeaderFooter_ver1.0'":
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: =
+
+    ScreenContainer1_2 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer1_2 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =PowerAppsTheme.Colors.Darker10
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =10
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =2
+
+            Arrow1_4 As arrow.backArrow:
+                AccessibleLabel: ="Back"
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(0, 0, 0, 0)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =40
+                OnSelect: =Back()
+                TabIndex: =0
+                Width: =40
+                ZIndex: =1
+
+            lblWeeklyTimesheet_4 As label:
+                Align: =Align.Center
+                AlignInContainer: =AlignInContainer.Center
+                Color: =PowerAppsTheme.Colors.Lighter80
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FillPortions: =1
+                FontWeight: =FontWeight.Semibold
+                Height: =52
+                PaddingRight: =10
+                Size: =18
+                Text: ="MY TEAM'S APPROVALS"
+                Width: =278
+                X: =544
+                ZIndex: =2
+
+            iconCloseWeekly_4 As icon.BackArrow:
+                AccessibleLabel: ="Close"
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(0, 18, 107, 1)
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =50
+                Icon: =Icon.Cancel
+                OnSelect: =Back()
+                PaddingRight: =20
+                TabIndex: =0
+                Width: =40
+                X: =749
+                Y: =2
+                ZIndex: =3
+
+        MainContainer1_2 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =3
+
+            Container1_1 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.Light
+                FillPortions: =0
+                Height: =60
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                LayoutMinHeight: =40
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =10
+                PaddingTop: =10
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =1
+
+                "TabList1_1 As 'Tab list'.pcfdataset":
+                    AccessibleLabel: ="Status Tabs"
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =55
+                    Items: =["Pending Approval","Approved","Rejected"]
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =280
+                    Size: ='TabList.Size'.Medium
+                    Width: =800
+                    X: =0
+                    Y: =0
+                    ZIndex: =3
+
+                TextCanvas1_1 As Text:
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    Text: =CountRows(galMyTimeCards_2.AllItems) & " item(s)"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =4
+
+            "galMyTimeCards_2 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+                AccessibleLabel: ="Time Card Approvals Gallery"
+                BorderColor: =RGBA(245, 245, 245, 1)
+                DelayItemLoading: =true
+                Items: |-
+                    =Switch(
+                        TabList1_1.Selected.Value,
+                        "Pending Approval",
+                        GroupBy(
+                            SortByColumns(
+                                Filter(
+                                    TimeEntries,
+                                    Manager.Email = currentUser.Email && Status.Value = "Submitted for Approval"
+                                ),
+                                "WeekStart",
+                                SortOrder.Descending
+                            ),
+                            "EmployeeTxt",
+                            "Employee"
+                        ),
+                        "Approved",
+                        GroupBy(
+                            SortByColumns(
+                                Filter(
+                                    TimeEntries,
+                                    Manager.Email = currentUser.Email && Status.Value = "Approved"
+                                ),
+                                "WeekStart",
+                                SortOrder.Descending
+                            ),
+                            "EmployeeTxt",
+                            "Employee"
+                        ),
+                        "Rejected",
+                        GroupBy(
+                            SortByColumns(
+                                Filter(
+                                    TimeEntries,
+                                    Manager.Email = currentUser.Email && Status.Value = "Rejected"
+                                ),
+                                "WeekStart",
+                                SortOrder.Descending
+                            ),
+                            "EmployeeTxt",
+                            "Employee"
+                        )
+                    )
+                    //SortByColumns(Filter(TimeEntries,Manager.Email=currentUser.Email&&Status.Value="Submitted for Approval"),"WeekStart",SortOrder.Descending)
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                TabIndex: =0
+                TemplatePadding: =20
+                TemplateSize: =200
+                WrapCount: =If(TimeCardApprovals.Size = ScreenSize.Small,1,2)
+                ZIndex: =2
+
+                "Gallery1 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+                    AccessibleLabel: ="Approvals Gallery"
+                    BorderColor: =RGBA(245, 245, 245, 1)
+                    DelayItemLoading: =true
+                    Height: =131
+                    Items: |-
+                        =Switch(
+                            TabList1_1.Selected.Value,
+                            "Pending Approval",
+                            GroupBy(
+                                SortByColumns(
+                                    Filter(
+                                        TimeEntries,
+                                        Manager.Email = currentUser.Email && Status.Value = "Submitted for Approval" && EmployeeTxt = ThisItem.EmployeeTxt
+                                    ),
+                                    "WeekStart",
+                                    SortOrder.Descending
+                                ),
+                                "Title",
+                                "week"
+                            ),
+                            "Approved",
+                            GroupBy(
+                                SortByColumns(
+                                    Filter(
+                                        TimeEntries,
+                                        Manager.Email = currentUser.Email && Status.Value = "Approved" && EmployeeTxt = ThisItem.EmployeeTxt
+                                    ),
+                                    "WeekStart",
+                                    SortOrder.Descending
+                                ),
+                                "Title",
+                                "week"
+                            ),
+                            "Rejected",
+                            GroupBy(
+                                SortByColumns(
+                                    Filter(
+                                        TimeEntries,
+                                        Manager.Email = currentUser.Email && Status.Value = "Rejected" && EmployeeTxt = ThisItem.EmployeeTxt
+                                    ),
+                                    "WeekStart",
+                                    SortOrder.Descending
+                                ),
+                                "Title",
+                                "week"
+                            )
+                        )
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    TabIndex: =0
+                    TemplatePadding: =0
+                    TemplateSize: =60
+                    Width: =566
+                    X: =35
+                    Y: =52
+                    ZIndex: =1
+
+                    Title9 As label:
+                        Color: =RGBA(50, 49, 48, 1)
+                        DisabledColor: =RGBA(161, 159, 157, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =12
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.Title
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.TemplateWidth - 86
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    NextArrow5 As icon.ChevronRight:
+                        AccessibleLabel: =Self.Tooltip
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        Color: =RGBA(166, 166, 166, 1)
+                        DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                        DisabledColor: =RGBA(225, 223, 221, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        FocusedBorderThickness: =4
+                        Height: =50
+                        HoverBorderColor: =RGBA(0, 0, 0, 0)
+                        HoverColor: =RGBA(16, 110, 190, 1)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.ChevronRight
+                        OnSelect: |-
+                            =Select(Parent);
+                            Set(
+                                selectedTimeCard,
+                                ThisItem
+                            );
+                            Switch(
+                                TabList1_1.Selected.Value,
+                                "Pending Approval",
+                                ClearCollect(
+                                    selectedTimeEntries,
+                                    Filter(
+                                        TimeEntries,
+                                        Manager.Email = currentUser.Email && Status.Value = "Submitted for Approval" && Title = selectedTimeCard.Title
+                                    )
+                                );
+                                Navigate(
+                                    TimeCardContinue,
+                                    ScreenTransition.Fade,
+                                    {varApproval: true,varStatus:"Submitted for Approval"}
+                                ),
+                                "Rejected",
+                                ClearCollect(
+                                    selectedTimeEntries,
+                                    Filter(
+                                        TimeEntries,
+                                        Manager.Email = currentUser.Email && Status.Value = "Rejected" && Title = selectedTimeCard.Title
+                                    )
+                                );
+                                Navigate(
+                                    TimeCardContinue,
+                                    ScreenTransition.Fade,
+                                    {varApproval: true,varStatus:"Rejected"}
+                                ),
+                                "Approved",
+                                ClearCollect(
+                                    selectedTimeEntries,
+                                    Filter(
+                                        TimeEntries,
+                                        Manager.Email = currentUser.Email && Status.Value = "Approved" && Title = selectedTimeCard.Title
+                                    )
+                                );
+                                Navigate(
+                                    TimeCardContinue,
+                                    ScreenTransition.Fade,
+                                    {varApproval: true,varStatus:"Approved"}
+                                )
+                            )
+                        PaddingBottom: =12
+                        PaddingLeft: =12
+                        PaddingRight: =12
+                        PaddingTop: =12
+                        PressedBorderColor: =RGBA(0, 0, 0, 0)
+                        PressedColor: =RGBA(16, 110, 190, 1)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        TabIndex: =-0
+                        Tooltip: ="View item details"
+                        Width: =50
+                        X: =Parent.TemplateWidth - Self.Width - 12
+                        Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                        ZIndex: =2
+
+                    Separator5 As rectangle:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =8
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Self.Height
+                        ZIndex: =3
+
+                    Rectangle5 As rectangle:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(0, 120, 212, 1)
+                        Height: =Parent.TemplateHeight - Separator5.Height
+                        OnSelect: =Select(Parent)
+                        Visible: =ThisItem.IsSelected
+                        Width: =4
+                        ZIndex: =4
+
+                Title6 As label:
+                    Color: =RGBA(50, 49, 48, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =12
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.EmployeeTxt
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 86
+                    X: =15
+                    Y: =18
+                    ZIndex: =2
+
+                Separator2 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =8
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - Self.Height
+                    ZIndex: =4
+
+                Rectangle3 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 120, 212, 1)
+                    Height: =Parent.TemplateHeight - Separator2.Height
+                    OnSelect: =Select(Parent)
+                    Visible: =ThisItem.IsSelected
+                    Width: =4
+                    ZIndex: =5
+

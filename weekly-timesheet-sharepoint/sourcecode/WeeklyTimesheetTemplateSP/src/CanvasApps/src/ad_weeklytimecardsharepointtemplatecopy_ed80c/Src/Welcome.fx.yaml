@@ -1,0 +1,279 @@
+"Welcome As screen.'autoLayout_HeaderFooter_ver1.0'":
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+
+    ScreenContainer2 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer2 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =75
+            LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =2
+
+            Header1 As Header:
+                BasePaletteColor: =PowerAppsTheme.Colors.Darker10
+                DisplayMode: =DisplayMode.Edit
+                Font: =Font.'Open Sans'
+                FontColor: =
+                Height: =75
+                LayoutMinHeight: =75
+                LayoutMinWidth: =Parent.Width
+                Logo: =logo
+                LogoTooltip: ="The logo image"
+                OnSelectLogo: =false
+                Style: ='Header.Style'.Primary
+                Title: |-
+                    ="Timesheet Management"
+                    
+                    //"Welcome, " & First(Split(currentUser.FullName," ")).Result &"!"                                                  
+                UserEmail: =User().Email
+                UserImage: =User().Image
+                UserName: =User().FullName
+                Width: =Parent.Width
+                X: =0
+                Y: =0
+                ZIndex: =2
+
+        MainContainer2 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Width: =Parent.Width
+            ZIndex: =3
+
+            "galleryDashboard As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                AccessibleLabel: ="Home Selection"
+                BorderColor: =RGBA(0, 18, 107, 1)
+                Height: =378
+                Items: |-
+                    =Table(
+                        {
+                            image: timesheet,
+                            name: "New Timesheet",
+                            Page: NewTimeCard
+                        },
+                        {
+                            image: me,
+                            name: "My Timesheets",
+                            Page: MyTimeCards
+                        },
+                        {
+                            image: approve,
+                            name: "Approvals",
+                            Page: TimeCardApprovals
+                        }
+                    )
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =200
+                OnSelect: =
+                TabIndex: =0
+                TemplateSize: =273
+                Transition: =Transition.Pop
+                Width: =Parent.Width
+                WrapCount: =Switch(Welcome.Size,ScreenSize.Small,1, ScreenSize.Medium,1, 3)
+                X: =33
+                Y: =280
+                ZIndex: =3
+
+                Container5 As groupContainer.verticalAutoLayoutContainer:
+                    DropShadow: =DropShadow.Light
+                    Height: =250
+                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Width: =If(Welcome.Size = ScreenSize.Small,330,400)
+                    X: =6
+                    Y: =9
+                    ZIndex: =1
+
+                    Container8 As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.Center
+                        LayoutMinHeight: =200
+                        LayoutMinWidth: =250
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        Width: =Parent.Width
+                        ZIndex: =4
+
+                        Circle2 As circle:
+                            AccessibleLabel: ="Circle"
+                            BorderColor: =RGBA(128, 128, 128, 1)
+                            BorderThickness: =1
+                            Fill: =PowerAppsTheme.Colors.Lighter80
+                            Height: =160
+                            OnSelect: |-
+                                =If(
+                                    ThisItem.name = "New Timesheet",
+                                    ClearCollect(
+                                        newTimeEntry,
+                                        {
+                                              Employee: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                                Claims: "i:0#.f|membership|" & currentUser.Email,
+                                                Department: "",
+                                                DisplayName: currentUser.FullName,
+                                                Email: currentUser.Email,
+                                                JobTitle: "",
+                                                Picture: ""
+                                            },
+                                             BillTo: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: 0,
+                                                Value: ""
+                                            },
+                                            Mon: 0,
+                                            Tues: 0,
+                                            Weds: 0,
+                                            Thurs: 0,
+                                            Fri: 0,
+                                            Sat: 0,
+                                            Sun: 0,
+                                            Comments: ""
+                                        }
+                                    );
+                                    //Clear(copiedEntries)
+                                );
+                                Navigate(ThisItem.Page)
+                            TabIndex: =0
+                            Width: =160
+                            X: =(Parent.Width - Self.Width) / 2
+                            Y: =Parent.Y + 15
+                            ZIndex: =1
+
+                        Title1 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(0, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =1
+                            FontWeight: =FontWeight.Semibold
+                            Height: =51
+                            OnSelect: |-
+                                =If(
+                                    ThisItem.name = "New Timesheet",
+                                    ClearCollect(
+                                        newTimeEntry,
+                                        {
+                                              Employee: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                                Claims: "i:0#.f|membership|" & currentUser.Email,
+                                                Department: "",
+                                                DisplayName: currentUser.FullName,
+                                                Email: currentUser.Email,
+                                                JobTitle: "",
+                                                Picture: ""
+                                            },
+                                             BillTo: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: 0,
+                                                Value: ""
+                                            },
+                                            Mon: 0,
+                                            Tues: 0,
+                                            Weds: 0,
+                                            Thurs: 0,
+                                            Fri: 0,
+                                            Sat: 0,
+                                            Sun: 0,
+                                            Comments: ""
+                                        }
+                                    );
+                                    //Clear(copiedEntries)
+                                );
+                                Navigate(ThisItem.Page)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =20
+                            TabIndex: =0
+                            Text: =ThisItem.name
+                            Width: =Parent.Width - 5
+                            X: =6
+                            Y: =Circle2.Y+Circle2.Height +8
+                            ZIndex: =2
+
+                        Image1 As image:
+                            AccessibleLabel: ="Image"
+                            BorderColor: =RGBA(0, 18, 107, 1)
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            Image: =ThisItem.image
+                            OnSelect: |-
+                                =If(
+                                    ThisItem.name = "New Timesheet",
+                                    ClearCollect(
+                                        newTimeEntry,
+                                        {
+                                              Employee: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                                Claims: "i:0#.f|membership|" & currentUser.Email,
+                                                Department: "",
+                                                DisplayName: currentUser.FullName,
+                                                Email: currentUser.Email,
+                                                JobTitle: "",
+                                                Picture: ""
+                                            },
+                                             BillTo: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: 0,
+                                                Value: ""
+                                            },
+                                            Mon: 0,
+                                            Tues: 0,
+                                            Weds: 0,
+                                            Thurs: 0,
+                                            Fri: 0,
+                                            Sat: 0,
+                                            Sun: 0,
+                                            Comments: ""
+                                        }
+                                    );
+                                    //Clear(copiedEntries)
+                                );
+                                Navigate(ThisItem.Page)
+                            TabIndex: =0
+                            Width: =128
+                            X: =(Parent.Width - Self.Width) / 2
+                            Y: =Parent.Y + 35
+                            ZIndex: =3
+

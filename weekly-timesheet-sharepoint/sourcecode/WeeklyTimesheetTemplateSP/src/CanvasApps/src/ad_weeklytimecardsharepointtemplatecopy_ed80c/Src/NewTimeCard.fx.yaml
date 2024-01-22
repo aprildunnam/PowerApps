@@ -1,0 +1,798 @@
+"NewTimeCard As screen.'autoLayout_HeaderFooter_ver1.0'":
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: |-
+        =Concurrent(
+            ClearCollect(colWeeks, AddColumns(
+            weeksList,
+            "WeekEnd",
+            DateAdd(
+                Value,
+                6,
+                TimeUnit.Days
+            ),
+            "Week Display",
+            Value & " to " & DateAdd(
+                Value,
+                6,
+                TimeUnit.Days
+            )
+        )),
+            Reset(ddWeeks),
+            Reset(galleryTimeCard)
+        )
+
+    ScreenContainer3 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer3 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =PowerAppsTheme.Colors.Darker10
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =10
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =2
+
+            Arrow1 As arrow.backArrow:
+                AccessibleLabel: ="Back"
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(0, 0, 0, 0)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =40
+                OnSelect: =Back()
+                TabIndex: =0
+                Width: =40
+                ZIndex: =1
+
+            lblWeeklyTimesheet As label:
+                Align: =Align.Center
+                AlignInContainer: =AlignInContainer.Center
+                Color: =PowerAppsTheme.Colors.Lighter80
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FillPortions: =1
+                FontWeight: =FontWeight.Semibold
+                Height: =52
+                PaddingRight: =10
+                Size: =18
+                Text: ="WEEKLY TIMESHEET - " & currentUser.FullName
+                Width: =278
+                X: =544
+                ZIndex: =2
+
+            iconCloseWeekly As icon.BackArrow:
+                AccessibleLabel: ="Close"
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(0, 18, 107, 1)
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =50
+                Icon: =Icon.Cancel
+                OnSelect: =Back()
+                PaddingRight: =20
+                TabIndex: =0
+                Width: =40
+                X: =749
+                Y: =2
+                ZIndex: =3
+
+        MainContainer3 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =3
+
+            Container3_1 As groupContainer.verticalAutoLayoutContainer:
+                DropShadow: =DropShadow.Light
+                FillPortions: =0
+                Height: =80
+                LayoutGap: =10
+                LayoutMinHeight: =50
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =1
+
+                lblWeek As label:
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderColor: =RGBA(0, 18, 107, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =45
+                    PaddingLeft: =25
+                    Size: =13
+                    Text: |-
+                        ="Week:"
+                    Width: =120
+                    Y: =3
+                    ZIndex: =1
+
+                ddWeeks As Combobox.pcfdataset:
+                    AccessibleLabel: ="Select Week Dropdown"
+                    AlignInContainer: =AlignInContainer.Center
+                    DefaultSelectedItems: |-
+                        =LookUp(colWeeks,WeekEnd = DateAdd(
+                                currentMonday,
+                                6,
+                                TimeUnit.Days
+                            ))
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =45
+                    InputTextPlaceholder: ="Select Week"
+                    Items: =colWeeks
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =320
+                    Width: =400
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+
+                    "'Week Display1' As pcfDataField.textualColumn":
+                        FieldDisplayName: ="Week Display"
+                        FieldName: ="Week Display"
+                        FieldType: ="s"
+                        FieldVariantName: ="textualColumn"
+                        Order: =1
+                        ZIndex: =16
+
+                iconCopy As icon.Copy:
+                    AccessibleLabel: ="Copy"
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderColor: =RGBA(0, 18, 107, 1)
+                    Color: =PowerAppsTheme.Colors.Darker10
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(244, 244, 244, 1)
+                    Height: =25
+                    Icon: =Icon.Copy
+                    OnSelect: |-
+                        =ClearCollect(
+                            newTimeEntry,
+                            Filter(
+                                TimeEntries,
+                                'Week Start' = DateAdd(
+                                    ddWeeks.Selected.WeekEnd,
+                                    -6,
+                                    TimeUnit.Days
+                                )
+                            )
+                        );
+                        Notify(ddWeeks.Selected.'Week Display' & " copied!",NotificationType.Success)
+                    TabIndex: =0
+                    Tooltip: ="Copy this week"
+                    Width: =25
+                    X: =544
+                    Y: =2
+                    ZIndex: =3
+
+                lblEmployee As label:
+                    Align: =Align.Right
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderColor: =RGBA(0, 18, 107, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =35
+                    PaddingLeft: =25
+                    Size: =13
+                    Text: |-
+                        ="Employee:   " & currentUser.FullName
+                    Width: =520
+                    Y: =55
+                    ZIndex: =4
+
+            Container3 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =If(NewTimeCard.Size = ScreenSize.Small,AlignInContainer.Start,AlignInContainer.Stretch)
+                DropShadow: =DropShadow.Light
+                FillPortions: =0
+                Height: =80
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =2
+
+                "galHeaders As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+                    AccessibleLabel: ="Table Headers"
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(245, 245, 245, 1)
+                    DelayItemLoading: =true
+                    FillPortions: =0
+                    Height: =80
+                    Items: |-
+                        =Table(
+                            {Name: "Bill To"},
+                            {
+                                Name: Text(
+                                    ddWeeks.Selected.Value,
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Mon"
+                            },
+                            {
+                                Name: Text(
+                                    DateAdd(
+                                        ddWeeks.Selected.Value,
+                                        1
+                                    ),
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Tues"
+                            },
+                            {
+                                Name: Text(
+                                    DateAdd(
+                                        ddWeeks.Selected.Value,
+                                        2
+                                    ),
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Wed"
+                            },
+                            {
+                                Name: Text(
+                                    DateAdd(
+                                        ddWeeks.Selected.Value,
+                                        3
+                                    ),
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Thurs"
+                            },
+                            {
+                                Name: Text(
+                                    DateAdd(
+                                        ddWeeks.Selected.Value,
+                                        4
+                                    ),
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Fri"
+                            },
+                            {
+                                Name: Text(
+                                    DateAdd(
+                                        ddWeeks.Selected.Value,
+                                        5
+                                    ),
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Sat"
+                            },
+                            {
+                                Name: Text(
+                                    DateAdd(
+                                        ddWeeks.Selected.Value,
+                                        6
+                                    ),
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Sun"
+                            },
+                            {Name:"Total"},
+                            {Name: "Notes"}
+                        )
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =60
+                    LayoutMinWidth: =200
+                    LoadingSpinner: =LoadingSpinner.Data
+                    TabIndex: =0
+                    TemplatePadding: =2
+                    TemplateSize: =70
+                    Width: =1100
+                    WrapCount: =10
+                    ZIndex: =1
+
+                    Title3 As label:
+                        Align: |-
+                            =Switch(
+                                ThisItem.Name,
+                                "Bill To",
+                                Align.Right,
+                                "Notes",
+                                Align.Left,
+                                Text(
+                                    ddWeeks.Selected.Value,
+                                    "[$-en-US]dd"
+                                ) & Char(10) & "Mon",
+                                Align.Right,
+                               Text(
+                                        DateAdd(
+                                            ddWeeks.Selected.Value,
+                                            1
+                                        ),
+                                        "[$-en-US]dd"
+                                    ) & Char(10) & "Tues",
+                                Align.Right,
+                                Align.Center
+                            )
+                        Color: =RGBA(50, 49, 48, 1)
+                        DisabledColor: =RGBA(161, 159, 157, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Self.Size * 3
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =12
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.Name
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.TemplateWidth - 15
+                        X: =16
+                        Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                        ZIndex: =1
+
+            "galleryTimeCard As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+                AccessibleLabel: ="Gallery Time Card"
+                BorderColor: =RGBA(245, 245, 245, 1)
+                DelayItemLoading: =true
+                Height: =517
+                Items: =newTimeEntry
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                TabIndex: =0
+                TemplatePadding: =0
+                TemplateSize: =90
+                Width: =Parent.Width
+                Y: =168
+                ZIndex: =3
+
+                iconDelete As icon.Trash:
+                    AccessibleLabel: ="Delete Row"
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =PowerAppsTheme.Colors.Darker30
+                    DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                    DisabledColor: =RGBA(225, 223, 221, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =4
+                    Height: =30
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(16, 110, 190, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.Trash
+                    OnSelect: |-
+                        =Select(Parent);
+                        Remove(newTimeEntry,ThisItem)
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =RGBA(16, 110, 190, 1)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    TabIndex: =0
+                    Width: =30
+                    X: =iconAdd.X + iconAdd.Width +10
+                    Y: =20
+                    ZIndex: =1
+
+                iconAdd As icon.Add:
+                    AccessibleLabel: ="Add Row"
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =PowerAppsTheme.Colors.Darker30
+                    DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                    DisabledColor: =RGBA(225, 223, 221, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =4
+                    Height: =30
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(16, 110, 190, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.Add
+                    OnSelect: |-
+                        =Select(Parent);
+                        Patch(
+                            newTimeEntry,
+                            ThisItem,
+                            {
+                                Employee: {
+                                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                    Claims: "i:0#.f|membership|" & currentUser.Email,
+                                    Department: "",
+                                    DisplayName: currentUser.FullName,
+                                    Email: currentUser.Email,
+                                    JobTitle: "",
+                                    Picture: ""
+                                },
+                                EmployeeTxt:currentUser.FullName,
+                                BillTo: {
+                                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                    Id: ddBillTo.Selected.ID,
+                                    Value: ddBillTo.Selected.Title
+                                },
+                                Mon: Value(tbMon.Value),
+                                Tues: Value(tbTues.Value),
+                                Weds: Value(tbWeds.Value),
+                                Thurs: Value(tbThurs.Value),
+                                Fri: Value(tbFri.Value),
+                                Sat: Value(tbSat.Value),
+                                Sun: Value(tbSun.Value),
+                                Comments: tbComments.Value
+                            }
+                        );
+                        Collect(
+                            newTimeEntry,
+                            {
+                                Employee: {
+                                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                    Claims: "i:0#.f|membership|" & currentUser.Email,
+                                    Department: "",
+                                    DisplayName: currentUser.FullName,
+                                    Email: currentUser.Email,
+                                    JobTitle: "",
+                                    Picture: ""
+                                },
+                                EmployeeTxt:currentUser.FullName,
+                                BillTo: {
+                                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                    Id: 0,
+                                    Value: ""
+                                },
+                                Mon: 0,
+                                Tues: 0,
+                                Weds: 0,
+                                Thurs: 0,
+                                Fri: 0,
+                                Sat: 0,
+                                Sun: 0,
+                                Comments: ""
+                            }
+                        )
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =RGBA(16, 110, 190, 1)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    TabIndex: =0
+                    Width: =30
+                    X: =tbComments.X + tbComments.Width + 10
+                    Y: =20
+                    ZIndex: =2
+
+                ddBillTo As Combobox.pcfdataset:
+                    AccessibleLabel: ="Bill To Dropdown"
+                    DefaultSelectedItems: =LookUp(BillTo,ID = ThisItem.BillTo.Id)
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =40
+                    Items: =BillTo
+                    Width: =155
+                    X: =5
+                    Y: =20
+                    ZIndex: =13
+
+                    Title8 As pcfDataField.textualColumn:
+                        FieldDisplayName: ="Title"
+                        FieldName: ="Title"
+                        FieldType: ="s"
+                        FieldVariantName: ="textualColumn"
+                        Order: =1
+                        ZIndex: =14
+
+                    Attachments4 As pcfDataField.textualColumn:
+                        FieldDisplayName: ="Attachments"
+                        FieldName: ="{Attachments}"
+                        FieldType: ="r*"
+                        FieldVariantName: ="textualColumn"
+                        Order: =2
+                        ZIndex: =15
+
+                "tbMon As 'Text input'":
+                    AccessibleLabel: ="Monday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Mon
+                    Width: =60
+                    X: =ddBillTo.Width + ddBillTo.X + 20
+                    Y: =20
+                    ZIndex: =14
+
+                "tbTues As 'Text input'":
+                    AccessibleLabel: ="Tuesday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Tues
+                    Width: =60
+                    X: =tbMon.X + tbMon.Width + 40
+                    Y: =20
+                    ZIndex: =15
+
+                "tbWeds As 'Text input'":
+                    AccessibleLabel: ="Wednesday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Weds
+                    Width: =60
+                    X: =tbTues.X + tbTues.Width +40 
+                    Y: =20
+                    ZIndex: =16
+
+                "tbThurs As 'Text input'":
+                    AccessibleLabel: ="Thursday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Thurs
+                    Width: =60
+                    X: =tbWeds.X + tbWeds.Width +40 
+                    Y: =20
+                    ZIndex: =17
+
+                "tbFri As 'Text input'":
+                    AccessibleLabel: ="Friday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Fri
+                    Width: =60
+                    X: =tbThurs.X + tbThurs.Width +50
+                    Y: =20
+                    ZIndex: =18
+
+                "tbSat As 'Text input'":
+                    AccessibleLabel: ="Saturday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Sat
+                    Width: =60
+                    X: =tbFri.X + tbFri.Width +60
+                    Y: =20
+                    ZIndex: =19
+
+                "tbSun As 'Text input'":
+                    AccessibleLabel: ="Sunday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =ThisItem.Sun
+                    Width: =60
+                    X: =tbSat.X + tbSat.Width +50
+                    Y: =20
+                    ZIndex: =20
+
+                "tbComments As 'Text input'":
+                    AccessibleLabel: ="Comment Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =40
+                    Placeholder: =""
+                    Value: =ThisItem.Comments
+                    Width: =250
+                    X: =tbTotal.X + tbTotal.Width +25
+                    Y: =20
+                    ZIndex: =21
+
+                "tbTotal As 'Text input'":
+                    AccessibleLabel: ="Sunday Text Input"
+                    Align: ='TextInputCanvas.Align'.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.View
+                    FontColor: =
+                    Height: =40
+                    Placeholder: ="0"
+                    Value: =Sum(tbMon.Value,tbTues.Value,tbWeds.Value,tbThurs.Value,tbFri.Value,tbSat.Value,tbSun.Value)
+                    Width: =60
+                    X: =tbSun.X + tbSun.Width +35
+                    Y: =20
+                    ZIndex: =22
+
+        FooterContainer2 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =4
+
+            Container2 As groupContainer.verticalAutoLayoutContainer:
+                LayoutGap: =10
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =60
+                LayoutMinWidth: =200
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                PaddingRight: =20
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =4
+
+                btnSave As Button:
+                    AccessibleLabel: ="Save"
+                    AlignInContainer: =AlignInContainer.Center
+                    Appearance: ='ButtonCanvas.Appearance'.Secondary
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: |
+                        =ForAll(
+                            galleryTimeCard.AllItems,
+                            Patch(
+                                TimeEntries,
+                                Defaults(TimeEntries),
+                                {
+                                    Title: Text(
+                                        ddWeeks.Selected.Value,
+                                        DateTimeFormat.ShortDate
+                                    ) & " - " & Text(
+                                        ddWeeks.Selected.Value + 6,
+                                        DateTimeFormat.ShortDate
+                                    ),
+                                    'Week Start': ddWeeks.Selected.Value,
+                                    Mon: Value(tbMon.Value),
+                                    Tues: Value(tbTues.Value),
+                                    Weds: Value(tbWeds.Value),
+                                    Thurs: Value(tbThurs.Value),
+                                    Fri: Value(tbFri.Value),
+                                    Sat: Value(tbSat.Value),
+                                    Sun: Value(tbSun.Value),
+                                    Total: Value(tbMon.Value) + Value(tbTues.Value) + Value(tbWeds.Value) + Value(tbThurs.Value) + Value(tbFri.Value) + Value(tbSat.Value) + Value(tbSun.Value),
+                                    Comments: tbComments.Value,
+                                    Employee: {
+                                        '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                        Claims: "i:0#.f|membership|" & currentUser.Email,
+                                        Department: "",
+                                        DisplayName: currentUser.FullName,
+                                        Email: currentUser.Email,
+                                        JobTitle: "",
+                                        Picture: ""
+                                    },
+                                    EmployeeTxt:currentUser.FullName,
+                                    BillTo: {
+                                        '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                        Id: ddBillTo.Selected.ID,
+                                        Value: ddBillTo.Selected.Title
+                                    },
+                                    Manager: {
+                                        '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                        Claims: "i:0#.f|membership|" & currentUser.Email,
+                                        Department: "",
+                                        DisplayName: currentUser.FullName,
+                                        Email: currentUser.Email,
+                                        JobTitle: "",
+                                        Picture: ""
+                                    },
+                                    Status: {
+                                        ID: 1,
+                                        Value: "Pending"
+                                    }
+                                }
+                            )
+                        );
+                        
+                        Refresh(TimeEntries);
+                        Navigate(Success,ScreenTransition.Fade,{successMessage:"Timesheet saved!"})
+                    Text: ="SAVE"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =3
+
+                btnSubmit As Button:
+                    AccessibleLabel: ="Submit"
+                    AlignInContainer: =AlignInContainer.Center
+                    BasePaletteColor: =
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: |
+                        =ForAll(
+                            galleryTimeCard.AllItems,
+                            Patch(
+                                TimeEntries,
+                                Defaults(TimeEntries),
+                                {
+                                    Title: Text(ddWeeks.Selected.Value,DateTimeFormat.ShortDate) & " - " & Text(ddWeeks.Selected.Value + 6, DateTimeFormat.ShortDate),
+                                    'Week Start': ddWeeks.Selected.Value,
+                                    Mon: Value(tbMon.Value),
+                                    Tues: Value(tbTues.Value),
+                                    Weds: Value(tbWeds.Value),
+                                    Thurs: Value(tbThurs.Value),
+                                    Fri: Value(tbFri.Value),
+                                    Sat: Value(tbSat.Value),
+                                    Sun: Value(tbSun.Value),
+                                    Total:Value(tbMon.Value) + Value(tbTues.Value) + Value(tbWeds.Value) +
+                                Value(tbThurs.Value) + Value(tbFri.Value) + Value(tbSat.Value) +Value(tbSun.Value),
+                                    Comments: tbComments.Value,
+                                    Employee: {
+                                        '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                        Claims: "i:0#.f|membership|" & currentUser.Email,
+                                        Department: "",
+                                        DisplayName: currentUser.FullName,
+                                        Email: currentUser.Email,
+                                        JobTitle: "",
+                                        Picture: ""
+                                    },
+                                    EmployeeTxt:currentUser.FullName,
+                                    BillTo: {
+                                        '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                        Id: ddBillTo.Selected.ID,
+                                        Value: ddBillTo.Selected.Title
+                                    },
+                                    Manager: {
+                                        '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                                        Claims: "i:0#.f|membership|" &  Office365Users.ManagerV2(User().Email).mail,
+                                        Department: "",
+                                        DisplayName:  Office365Users.ManagerV2(User().Email).displayName,
+                                        Email:  Office365Users.ManagerV2(User().Email).mail,
+                                        JobTitle: "",
+                                        Picture: ""
+                                    },
+                                    Status: {
+                                        ID: 2,
+                                        Value: "Submitted for Approval"
+                                    }
+                                }
+                            )
+                        );
+                        Refresh(TimeEntries); 
+                        Navigate(Success,ScreenTransition.Fade,{successMessage:"Timesheet Submitted for Approval"})
+                    Text: ="SUBMIT"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =4
+

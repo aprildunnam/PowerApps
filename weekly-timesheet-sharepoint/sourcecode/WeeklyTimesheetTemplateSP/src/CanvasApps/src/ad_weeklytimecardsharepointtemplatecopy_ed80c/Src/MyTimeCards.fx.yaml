@@ -1,0 +1,326 @@
+"MyTimeCards As screen.'autoLayout_HeaderFooter_ver1.0'":
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+
+    ScreenContainer1 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =PowerAppsTheme.Colors.Darker10
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =10
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =2
+
+            Arrow1_1 As arrow.backArrow:
+                AccessibleLabel: ="Back"
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(0, 0, 0, 0)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =40
+                OnSelect: =Back()
+                TabIndex: =0
+                Width: =40
+                ZIndex: =1
+
+            lblWeeklyTimesheet_1 As label:
+                Align: =Align.Center
+                AlignInContainer: =AlignInContainer.Center
+                Color: =PowerAppsTheme.Colors.Lighter80
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Fill: =Color.Transparent
+                FillPortions: =1
+                FontWeight: =FontWeight.Semibold
+                Height: =52
+                PaddingRight: =10
+                Size: =18
+                Text: ="MY TIMECARDS"
+                Width: =278
+                X: =544
+                ZIndex: =2
+
+            iconCloseWeekly_1 As icon.BackArrow:
+                AccessibleLabel: ="Close"
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(0, 18, 107, 1)
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =50
+                Icon: =Icon.Cancel
+                OnSelect: =Back()
+                PaddingRight: =20
+                TabIndex: =0
+                Width: =40
+                X: =749
+                Y: =2
+                ZIndex: =3
+
+        MainContainer1 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =3
+
+            Container1 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.Light
+                FillPortions: =0
+                Height: =60
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                LayoutMinHeight: =40
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =10
+                PaddingTop: =10
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =1
+
+                "TabList1 As 'Tab list'.pcfdataset":
+                    AccessibleLabel: ="Status Tabs"
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =55
+                    Items: =["All","Pending","Submitted for Approval","Approved","Rejected"]
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =280
+                    Size: ='TabList.Size'.Medium
+                    Width: =Parent.Width - 100
+                    X: =0
+                    Y: =0
+                    ZIndex: =3
+
+                TextCanvas1 As Text:
+                    DisplayMode: =DisplayMode.Edit
+                    FontColor: =
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    Text: =CountRows(galMyTimeCards.AllItems) & " items"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =4
+
+            "galMyTimeCards As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver5.0'":
+                AccessibleLabel: ="My Timecards Gallery"
+                BorderColor: =RGBA(245, 245, 245, 1)
+                DelayItemLoading: =true
+                Items: |-
+                    =Switch(TabList1.Selected.Value,"All",
+                    GroupBy(
+                        SortByColumns(
+                            Filter(
+                                TimeEntries,
+                                Employee.Email = currentUser.Email
+                            ), "WeekStart", SortOrder.Descending) ,
+                        "Title","week"),
+                        "Pending",
+                        GroupBy(
+                        SortByColumns(
+                            Filter(
+                                TimeEntries,
+                                Employee.Email = currentUser.Email && Status.Value = "Pending"
+                            ), "WeekStart", SortOrder.Descending) ,
+                        "Title","week"),
+                        "Approved",
+                            GroupBy(
+                        SortByColumns(
+                            Filter(
+                                TimeEntries,
+                                Employee.Email = currentUser.Email && Status.Value = "Approved"
+                            ), "WeekStart", SortOrder.Descending) ,
+                        "Title","week"),
+                        "Rejected",
+                            GroupBy(
+                        SortByColumns(
+                            Filter(
+                                TimeEntries,
+                                Employee.Email = currentUser.Email && Status.Value = "Rejected"
+                            ), "WeekStart", SortOrder.Descending) ,
+                        "Title","week"),
+                        "Submitted for Approval",
+                            GroupBy(
+                        SortByColumns(
+                            Filter(
+                                TimeEntries,
+                                Employee.Email = currentUser.Email && Status.Value = "Submitted for Approval"
+                            ), "WeekStart", SortOrder.Descending) ,
+                        "Title","week"))
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                TabIndex: =0
+                TemplatePadding: =0
+                TemplateSize: =116
+                WrapCount: =If(MyTimeCards.Size = ScreenSize.Small,1,2)
+                ZIndex: =2
+
+                Title4 As label:
+                    Color: =RGBA(50, 49, 48, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =12
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.Title
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 86
+                    X: =16
+                    Y: =(Parent.TemplateHeight - (Self.Size*1.8 + Subtitle2.Size*1.8 + 2 *1.8)) / 2
+                    ZIndex: =1
+
+                Subtitle2 As label:
+                    Color: =RGBA(96, 94, 92, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =12
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =First(ThisItem.week.Status).Status.Value
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Title4.Width
+                    X: =Title4.X
+                    Y: =Title4.Y + Title4.Height
+                    ZIndex: =2
+
+                NextArrow2 As icon.ChevronRight:
+                    AccessibleLabel: =Self.Tooltip
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =RGBA(166, 166, 166, 1)
+                    DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                    DisabledColor: =RGBA(225, 223, 221, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =4
+                    Height: =50
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(16, 110, 190, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.ChevronRight
+                    OnSelect: |-
+                        =Select(Parent);
+                        Set(
+                            selectedTimeCard,
+                            ThisItem
+                        );
+                        ClearCollect(
+                            selectedTimeEntries,
+                            Filter(
+                                TimeEntries,
+                                Title = selectedTimeCard.Title && Employee.Email = currentUser.Email
+                            )
+                        );
+                        Switch(
+                            First(ThisItem.week.Status).Status.Value,
+                            "Pending",
+                            Navigate(
+                                TimeCardContinue,
+                                ScreenTransition.Fade,
+                                {
+                                    varApproval: false,
+                                    varStatus: "Pending"
+                                }
+                            ),
+                            "Submitted for Approval",
+                            Navigate(
+                                TimeCardContinue,
+                                ScreenTransition.Fade,
+                                {
+                                    varApproval: false,
+                                    varStatus: "Submitted for Approval"
+                                }
+                            ),
+                            "Rejected",
+                            Navigate(
+                                TimeCardContinue,
+                                ScreenTransition.Fade,
+                                {
+                                    varApproval: false,
+                                    varStatus: "Rejected"
+                                }
+                            ),
+                            "Approved",
+                            Navigate(
+                                TimeCardContinue,
+                                ScreenTransition.Fade,
+                                {
+                                    varApproval: false,
+                                    varStatus: "Approved"
+                                }
+                            )
+                        )
+                    PaddingBottom: =16
+                    PaddingLeft: =16
+                    PaddingRight: =16
+                    PaddingTop: =16
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =RGBA(16, 110, 190, 1)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    TabIndex: =0
+                    Tooltip: ="View item details"
+                    Width: =50
+                    X: =Parent.TemplateWidth - Self.Width - 12
+                    Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                    ZIndex: =4
+
+                Separator3 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =8
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - Self.Height
+                    ZIndex: =5
+
+                Rectangle2 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 120, 212, 1)
+                    Height: =Parent.TemplateHeight - Separator3.Height
+                    OnSelect: =Select(Parent)
+                    Visible: =ThisItem.IsSelected
+                    Width: =4
+                    ZIndex: =6
+

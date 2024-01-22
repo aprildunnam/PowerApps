@@ -1,0 +1,41 @@
+{
+  "Name": "Header",
+  "PcfConversions": [
+    {
+      "Action": [
+        {
+          "Name": "ThemeStyle",
+          "NewName": "Style",
+          "Type": "rename"
+        }
+      ],
+      "From": "0.0.20",
+      "To": "0.0.21"
+    },
+    {
+      "Action": [
+        {
+          "Name": "OnSelectLogo",
+          "Type": "add"
+        }
+      ],
+      "From": "0.0.23",
+      "To": "0.0.24"
+    },
+    {
+      "Action": [
+        {
+          "Name": "Font",
+          "Type": "add"
+        },
+        {
+          "Name": "FontColor",
+          "Type": "add"
+        }
+      ],
+      "From": "0.0.24",
+      "To": "0.0.25"
+    }
+  ],
+  "Version": "0.0.25"
+}
