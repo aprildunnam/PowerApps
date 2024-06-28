@@ -1,0 +1,88 @@
+---
+# The Office: YAML Basics
+
+# A simple string
+employee_name: "Michael Scott"  # This is how a string works
+
+# An integer representing age
+employee_age: 45  # This is how an integer works
+
+# A multiline string (note the use of the pipe symbol)
+employee_quote: |
+  "Beer, beats, Battlestar Galactica."
+  "I declare bankruptcy!"
+
+# A boolean indicating manager status
+is_manager: true
+
+# A list of favorite quotes
+favorite_quotes:
+  - "That's what she said!"
+  - "I declare bankruptcy!"
+
+# Dwight's tasks for the day (a list)
+tasks:
+  - "Battle Jim in a prank war"
+  - "Harvest beets"
+  - "Attend a beet convention"
+
+# Stanley's productivity level (an integer)
+productivity: 6  # Needs more pretzels
+
+# Angela's cat collection (a list of dictionaries)
+cats:
+  - name: "Sprinkles"
+    breed: "Persian"
+  - name: "Bandit"
+    breed: "Siamese"
+
+# Oscar's financial breakdown (a dictionary)
+finances:
+  income: 60000
+  expenses:
+    - "Accounting software subscription"
+    - "Cat food"
+    - "Sensible shoes"
+
+# Kelly's favorite colors (a list of strings)
+favorite_colors:
+  - "Purple"
+  - "Pink"
+  - "Glittery gold" 
+
+# Creed's to-do list (a list of dictionaries) 
+to_do_list:
+  - task: "Survive"
+    priority: "High"
+  - task: "Find out what the company does"
+    priority: "Low"
+
+# Meredith's favorite drinks (a dictionary)
+favorite_drinks:
+  alcoholic: "Vodka"
+  non_alcoholic: "Soda"
+
+# Phyllis's favorite foods (a list of dictionaries)
+favorite_foods:
+  - name: "Chocolate cake"
+    type: "Dessert"
+  - name: "Potato salad"
+    type: "Side dish"
+
+    # Kevin's favorite numbers (a list of integers) 
+favorite_numbers: 
+  - 69
+  - 420 
+
+# Ryan's career goals (a list of strings)
+career_goals:
+  - "Become a millionaire"
+  - "Start a successful business"
+  - "Retire by 40"
+
+  # Toby's hobbies (a list of strings)
+hobbies:  
+  - "Writing mystery novels"
+  - "Attending jury duty"
+  - "Avoiding Michael Scott"
+
